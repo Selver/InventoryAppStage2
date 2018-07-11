@@ -9,8 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class BookDbHelper extends SQLiteOpenHelper {
 
-    public static final String LOG_TAG = BookDbHelper.class.getSimpleName();
-
     /**
      * Name of the database file
      */

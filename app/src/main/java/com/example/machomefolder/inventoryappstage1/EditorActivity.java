@@ -46,11 +46,11 @@ public class EditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editor);
 
         // Find all relevant views that we will need to read user input from
-        mNameEditText = (EditText) findViewById(R.id.edit_book_name);
-        mPriceEditText = (EditText) findViewById(R.id.edit_book_price);
-        mQuantityEditText = (EditText) findViewById(R.id.edit_book_quantity);
-        mSupplierNameEditText = (EditText) findViewById(R.id.edit_book_supplier_name);
-        mSupplierPhoneEditText = (EditText) findViewById(R.id.edit_book_supplier_phone);
+        mNameEditText = findViewById(R.id.edit_book_name);
+        mPriceEditText = findViewById(R.id.edit_book_price);
+        mQuantityEditText = findViewById(R.id.edit_book_quantity);
+        mSupplierNameEditText = findViewById(R.id.edit_book_supplier_name);
+        mSupplierPhoneEditText = findViewById(R.id.edit_book_supplier_phone);
     }
 
     //get user input from editor and save new book into database.
@@ -83,10 +83,10 @@ public class EditorActivity extends AppCompatActivity {
         // Show a toast message depending on whether or not the insertion was successful
         if (newRowId == -1) {
             // If the row ID is -1, then there was an error with insertion.
-            Toast.makeText(this, "Error with saving book", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_with_saving_book), Toast.LENGTH_SHORT).show();
         } else {
             // Otherwise, the insertion was successful and we can display a toast with the row ID.
-            Toast.makeText(this, "Book saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.book_saved_with_row_id) + newRowId, Toast.LENGTH_SHORT).show();
         }
     }
 

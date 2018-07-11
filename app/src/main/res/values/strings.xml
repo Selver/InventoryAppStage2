@@ -39,6 +39,10 @@
 
     <!-- Currency of the book price -->
     <string name="unit_book_price">$</string>
+    <string name="error_with_saving_book">Error with saving book</string>
+    <string name="book_saved_with_row_id">Book saved with row id:</string>
+    <string name="the_books_table_contains">The books table contains</string>
+    <string name="books">books.</string>
 </resources>
 
 

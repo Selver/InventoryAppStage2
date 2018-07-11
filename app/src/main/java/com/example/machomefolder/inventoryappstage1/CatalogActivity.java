@@ -76,7 +76,7 @@ public class CatalogActivity extends AppCompatActivity {
                 null,                  // Don't filter by row groups
                 null);                   // The sort order
 
-        TextView displayView = (TextView) findViewById(R.id.text_view_book);
+        TextView displayView = findViewById(R.id.text_view_book);
 
         try {
             // Create a header in the Text View that looks like this:
@@ -86,7 +86,7 @@ public class CatalogActivity extends AppCompatActivity {
             //
             // In the while loop below, iterate through the rows of the cursor and display
             // the information from each column in this order.
-            displayView.setText("The books table contains " + cursor.getCount() + " books.\n\n");
+            displayView.setText(getString(R.string.the_books_table_contains) + cursor.getCount() + getString(R.string.books));
             displayView.append(BookContract.BookEntry._ID + " - " +
                     BookContract.BookEntry.COLUMN_BOOK_NAME + " - " +
                     BookContract.BookEntry.COLUMN_BOOK_PRICE + " - " +
@@ -130,7 +130,7 @@ public class CatalogActivity extends AppCompatActivity {
     /**
      * Helper method to insert hardcoded book data into the database. For debugging purposes only.
      */
-    private void insertPet() {
+    private void insertBook () {
         // Gets the database in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
@@ -142,15 +142,6 @@ public class CatalogActivity extends AppCompatActivity {
         values.put(BookContract.BookEntry.COLUMN_BOOK_QUANTITY, 5);
         values.put(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME, "Alibris");
         values.put(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE, "510-594-4568");
-
-        // Insert a new row for the catcher in the Rye in the database, returning the ID of that new row.
-        // The first argument for db.insert() is the books table name.
-        // The second argument provides the name of a column in which the framework
-        // can insert NULL in the event that the ContentValues is empty (if
-        // this is set to "null", then the framework will not insert a row when
-        // there are no values).
-        // The third argument is the ContentValues object containing the info for the book.
-        long newRowId = db.insert(BookContract.BookEntry.TABLE_NAME, null, values);
     }
 
     @Override
@@ -168,7 +159,7 @@ public class CatalogActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
-                insertPet();
+                insertBook ();
                 displayDatabaseInfo();
                 return true;
             // Respond to a click on the "Delete all entries" menu option
