@@ -37,8 +37,8 @@ public class BookDbHelper extends SQLiteOpenHelper {
         String SQL_CREATE_BOOKS_TABLE = "CREATE TABLE " + BookContract.BookEntry.TABLE_NAME + " ("
                 + BookContract.BookEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + BookContract.BookEntry.COLUMN_BOOK_NAME + " TEXT NOT NULL, "
-                + BookContract.BookEntry.COLUMN_BOOK_PRICE + " INTEGER, "
-                + BookContract.BookEntry.COLUMN_BOOK_QUANTITY + " INTEGER, "
+                + BookContract.BookEntry.COLUMN_BOOK_PRICE + " INTEGER NOT NULL, "
+                + BookContract.BookEntry.COLUMN_BOOK_QUANTITY + " INTEGER NOT NULL, "
                 + BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME + " TEXT,"
                 + BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE + " TEXT);";
 
@@ -54,3 +54,6 @@ public class BookDbHelper extends SQLiteOpenHelper {
         // The database is still at version 1, so there's nothing to do be done here.
     }
 }
+
+
+
