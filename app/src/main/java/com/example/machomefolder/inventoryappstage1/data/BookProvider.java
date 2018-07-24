@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.util.Log;
 
 /**
- * {@link ContentProvider} for Books app.
+ *  ContentProvider for Books app.
  */
 
 public class BookProvider extends ContentProvider {
@@ -39,25 +39,14 @@ public class BookProvider extends ContentProvider {
 
     // Static initializer. This is run the first time anything is called from this class.
     static {
-        // The calls to addURI() go here, for all of the content URI patterns that the provider
-        // should recognize. All paths added to the UriMatcher have a corresponding code to return
-        // when a match is found.
-
-        // The content URI of the form "content://com.example.android.pets/pets" will map to the
-        // integer code {@link #PETS}. This URI is used to provide access to MULTIPLE rows
-        // of the books table.
         sUriMatcher.addURI(BookContract.CONTENT_AUTHORITY, BookContract.PATH_BOOKS, BOOKS);
 
-        // The content URI of the form "content://com.example.android.books/books/#" will map to the
-        // integer code {@link #PET_ID}. This URI is used to provide access to ONE single row
-        // of the books table.
-        //
+       // This URI is used to provide access to ONE single row of the books table.
         // In this case, the "#" wildcard is used where "#" can be substituted for an integer.
         // For example, "content://com.example.android.books/books/3" matches, but
         // "content://com.example.android.books/books" (without a number at the end) doesn't match.
         sUriMatcher.addURI(BookContract.CONTENT_AUTHORITY, BookContract.PATH_BOOKS + "/#", BOOK_ID);
     }
-
     /**
      * Database helper object
      */
@@ -90,13 +79,6 @@ public class BookProvider extends ContentProvider {
                 break;
             case BOOK_ID:
                 // For the BOOK_ID code, extract out the ID from the URI.
-                // For an example URI such as "content://com.example.android.books/books/3",
-                // the selection will be "_id=?" and the selection argument will be a
-                // String array containing the actual ID of 3 in this case.
-                //
-                // For every "?" in the selection, we need to have an element in the selection
-                // arguments that will fill in the "?". Since we have 1 question mark in the
-                // selection, we have 1 String in the selection arguments' String array.
                 selection = BookContract.BookEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
 
@@ -128,6 +110,7 @@ public class BookProvider extends ContentProvider {
                 throw new IllegalArgumentException("Insertion is not supported for " + uri);
         }
     }
+
     /**
      * Insert a book into the database with the given content values. Return the new content URI
      * for that specific row in the database.
@@ -135,12 +118,14 @@ public class BookProvider extends ContentProvider {
     private Uri insertBook(Uri uri, ContentValues values) {
         // Check that the name is not null
         String name = values.getAsString(BookContract.BookEntry.COLUMN_BOOK_NAME);
+        Log.v(LOG_TAG, "Book name required ");
         if (name == null) {
             throw new IllegalArgumentException("Book requires a name");
         }
 
         Integer quantity = values.getAsInteger(BookContract.BookEntry.COLUMN_BOOK_QUANTITY);
         if (quantity == null || quantity < 0) {
+            Log.v(LOG_TAG, "Book name required ");
             throw new IllegalArgumentException("Book requires valid quantity");
         }
 
@@ -148,24 +133,24 @@ public class BookProvider extends ContentProvider {
         if (price == null || price < 0) {
             throw new IllegalArgumentException("Book requires valid price");
         }
-
+//if there supplier name provided
         if (values.containsKey(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME)) {
             String supplierName = values.getAsString(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME);
             if (supplierName == null) {
                 throw new IllegalArgumentException("Book requires a supplier name");
             }
         }
-
+//if supplier phone provided
         if (values.containsKey(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE)) {
             String supplierPhone = values.getAsString(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE);
             if (supplierPhone == null) {
                 throw new IllegalArgumentException("Book requires valid supplier phone");
             }
-
+        }
             // Get writeable database
             SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-            // Insert the new pet with the given values
+            // Insert the new book with the given values
             long id = database.insert(BookContract.BookEntry.TABLE_NAME, null, values);
             // If the ID is -1, then the insertion failed. Log an error and return null.
             if (id == -1) {
@@ -179,8 +164,6 @@ public class BookProvider extends ContentProvider {
             // Return the new URI with the ID (of the newly inserted row) appended at the end
             return ContentUris.withAppendedId(uri, id);
         }
-        return null;
-    }
 
         @Override
         public int update (Uri uri, ContentValues contentValues, String selection,
@@ -227,7 +210,7 @@ public class BookProvider extends ContentProvider {
 
             if (values.containsKey(BookContract.BookEntry.COLUMN_BOOK_PRICE)) {
 
-                Double price = values.getAsDouble(BookContract.BookEntry.COLUMN_BOOK_PRICE);
+                Integer price = values.getAsInteger(BookContract.BookEntry.COLUMN_BOOK_PRICE);
                 if (price == null || price < 0) {
                     throw new IllegalArgumentException("Book requires valid price");
                 }
@@ -241,12 +224,11 @@ public class BookProvider extends ContentProvider {
             }
 
             if (values.containsKey(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE)) {
-                Integer supplierPhone = values.getAsInteger(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE);
+                String supplierPhone = values.getAsString(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE);
                 if (supplierPhone == null) {
                     throw new IllegalArgumentException("Book requires valid supplier phone");
                 }
             }
-
 
             // If there are no values to update, then don't try to update the database
             if (values.size() == 0) {
@@ -316,6 +298,14 @@ public class BookProvider extends ContentProvider {
             }
         }
     }
+
+
+
+
+
+
+
+
 
 
 

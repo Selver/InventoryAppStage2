@@ -122,7 +122,6 @@ public class EditorActivity extends AppCompatActivity implements
          mQuantityEditText.setOnTouchListener(mTouchListener);
          mSupplierNameEditText.setOnTouchListener(mTouchListener);
          mSupplierPhoneEditText.setOnTouchListener(mTouchListener);
-
      }
 
     //get user input from editor and save new book into database.
@@ -130,7 +129,7 @@ public class EditorActivity extends AppCompatActivity implements
         String nameString = mNameEditText.getText().toString().trim();
         String priceString = mPriceEditText.getText().toString().trim();
         String quantityString = mQuantityEditText.getText().toString().trim();
-        int price = !TextUtils.isEmpty(priceString) ? Integer.parseInt(priceString) : 0;
+        int price = !TextUtils.isEmpty(priceString) ? Integer.parseInt(priceString) : 0; //why
         int quantity = !TextUtils.isEmpty(quantityString) ? Integer.parseInt(quantityString) : 0;
 
         String supplierNameString = mSupplierNameEditText.getText().toString().trim();
@@ -190,6 +189,7 @@ public class EditorActivity extends AppCompatActivity implements
             }
         }
     }
+
      @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
@@ -212,7 +212,6 @@ public class EditorActivity extends AppCompatActivity implements
          }
          return true;
      }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -432,5 +431,7 @@ public class EditorActivity extends AppCompatActivity implements
         finish();
     }
 }
+
+
 
 

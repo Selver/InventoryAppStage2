@@ -26,10 +26,14 @@ import com.example.machomefolder.inventoryappstage1.data.BookDbHelper;
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    /** Identifier for the book data loader */
+    /**
+     * Identifier for the book data loader
+     */
     private static final int BOOK_LOADER = 0;
 
-    /** Adapter for the ListView */
+    /**
+     * Adapter for the ListView
+     */
     BookCursorAdapter mCursorAdapter;
 
     @Override
@@ -71,10 +75,10 @@ public class CatalogActivity extends AppCompatActivity implements
                 // {@link BookEntry#CONTENT_URI}.
                 // For example, the URI would be "content://com.example.android.books/books/2"
                 // if the book with ID 2 was clicked on.
-                Uri currentPetUri = ContentUris.withAppendedId(BookContract.BookEntry.CONTENT_URI, id);
+                Uri currentBookUri = ContentUris.withAppendedId(BookContract.BookEntry.CONTENT_URI, id);
 
                 // Set the URI on the data field of the intent
-                intent.setData(currentPetUri);
+                intent.setData(currentBookUri);
 
                 // Launch the {@link EditorActivity} to display the data for the current book.
                 startActivity(intent);
@@ -88,7 +92,7 @@ public class CatalogActivity extends AppCompatActivity implements
     /**
      * Helper method to insert hardcoded book data into the database. For debugging purposes only.
      */
-    private void insertBook () {
+    private void insertBook() {
         // Create a ContentValues object where column names are the keys,
         // and book attributes are the values.
         ContentValues values = new ContentValues();
@@ -147,13 +151,11 @@ public class CatalogActivity extends AppCompatActivity implements
                 BookContract.BookEntry._ID,
                 BookContract.BookEntry.COLUMN_BOOK_NAME,
                 BookContract.BookEntry.COLUMN_BOOK_QUANTITY,
-                BookContract.BookEntry.COLUMN_BOOK_PRICE,
-                BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME,
-                BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE };
+                BookContract.BookEntry.COLUMN_BOOK_PRICE,};
 
         // This loader will execute the ContentProvider's query method on a background thread
         return new CursorLoader(this,   // Parent activity context
-                    BookContract.BookEntry.CONTENT_URI,   // Provider content URI to query
+                BookContract.BookEntry.CONTENT_URI,   // Provider content URI to query
                 projection,             // Columns to include in the resulting Cursor
                 null,                   // No selection clause
                 null,                   // No selection arguments
@@ -171,10 +173,17 @@ public class CatalogActivity extends AppCompatActivity implements
         // Callback called when the data needs to be deleted
         mCursorAdapter.swapCursor(null);
     }
-
-    @Override
+}
+ /*   @Override
     public void onBackPressed() {
 
         super.onBackPressed();
     }
-}
+}*/
+
+
+
+
+
+
+

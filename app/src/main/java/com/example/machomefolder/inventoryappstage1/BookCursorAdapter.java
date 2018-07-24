@@ -18,7 +18,7 @@ import com.example.machomefolder.inventoryappstage1.data.BookContract;
 public class BookCursorAdapter extends CursorAdapter {
 
     /**
-     * Constructs a new {@link BookCursorAdapter}.
+     * Constructs a new BookCursorAdapter.
      *
      * @param context The context
      * @param c       The cursor from which to get the data.
@@ -46,11 +46,6 @@ public class BookCursorAdapter extends CursorAdapter {
      * This method binds the book data (in the current row pointed to by cursor) to the given
      * list item layout. For example, the name for the current book can be set on the name TextView
      * in the list item layout.
-     *
-     * @param view    Existing view, returned earlier by newView() method
-     * @param context app context
-     * @param cursor  The cursor from which to get the data. The cursor is already moved to the
-     *                correct row.
      */
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
@@ -67,7 +62,7 @@ public class BookCursorAdapter extends CursorAdapter {
         final int quantity = cursor.getInt(cursor.getColumnIndexOrThrow(BookContract.BookEntry.COLUMN_BOOK_QUANTITY));
         int priceColumnIndex = cursor.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_PRICE);
 
-        // Read the book attributes from the Cursor for the current book
+        // Read the book attributes from the Cursor for the current book??? string or int
         final String bookName = cursor.getString(nameColumnIndex);
         final String bookQuantity = cursor.getString(quantityColumnIndex);
         final String bookPrice = cursor.getString(priceColumnIndex);
@@ -99,6 +94,13 @@ public void onClick(View view) {
         });
     }
         }
+
+
+
+
+
+
+
 
 
 
