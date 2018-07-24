@@ -9,11 +9,10 @@ import android.provider.BaseColumns;
  */
 public final class BookContract {
 
-    // To prevent someone from accidentally instantiating the contract class,
+    // To prevent someone from accidentally instantiating the contract class it must be private,
     // give it an empty constructor.
     private BookContract() {
     }
-
 
     /**
      * The "Content authority" is a name for the entire content provider, similar to the
@@ -33,7 +32,6 @@ public final class BookContract {
 
     /**
      * Inner class that defines constant values for the books database table.
-     * Each entry in the table represents a single book.
      */
     public static final class BookEntry implements BaseColumns {
 
@@ -51,7 +49,6 @@ public final class BookContract {
          */
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_BOOKS;
-
 
         /**
          * Name of database table for books
