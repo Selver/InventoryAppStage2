@@ -35,7 +35,7 @@ public class BookDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_books_detail);
+        setContentView(R.layout.activity_book_details);
 
         //get the intent to open details page
         Intent intent = getIntent();
