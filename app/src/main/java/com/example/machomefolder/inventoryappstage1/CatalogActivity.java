@@ -59,7 +59,7 @@ public class CatalogActivity extends AppCompatActivity implements
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent intent = new Intent(CatalogActivity.this, BookDetailActivity.class);
+                Intent intent = new Intent(CatalogActivity.this, BookDetailsActivity.class);
 
                 // Form the content URI that represents the specific book that was clicked on
                 Uri currentBookUri = ContentUris.withAppendedId(BookContract.BookEntry.CONTENT_URI, id);

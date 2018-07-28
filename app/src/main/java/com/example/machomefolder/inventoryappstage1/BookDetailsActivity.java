@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.machomefolder.inventoryappstage1.data.BookContract;
 
-public class BookDetailActivity extends AppCompatActivity {
+public class BookDetailsActivity extends AppCompatActivity {
 
     public String supplierPhone;
     Integer quantity;
@@ -35,7 +35,7 @@ public class BookDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_detail);
+        setContentView(R.layout.activity_books_detail);
 
         //get the intent to open details page
         Intent intent = getIntent();
@@ -99,7 +99,7 @@ public class BookDetailActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(BookDetailActivity.this, EditorActivity.class);
+                Intent intent = new Intent(BookDetailsActivity.this, EditorActivity.class);
 
                 intent.setData(mCurrentUri);
                 startActivity(intent);
