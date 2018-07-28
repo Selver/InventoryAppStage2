@@ -107,7 +107,6 @@ public class BookProvider extends ContentProvider {
             throw new IllegalArgumentException("Book requires valid price");
         }
 
-
         if (values.containsKey(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME)) {
             String supplierName = values.getAsString(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME);
             if (supplierName == null) {

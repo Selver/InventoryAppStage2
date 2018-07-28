@@ -60,7 +60,6 @@ public class BookCursorAdapter extends CursorAdapter {
             @Override
             public void onClick(View view) {
 
-
                 if (quantity > 0) {
                     Integer afterSale = quantity - 1;
 

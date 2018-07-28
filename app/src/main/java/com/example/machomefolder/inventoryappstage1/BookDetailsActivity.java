@@ -56,7 +56,6 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         Cursor c = managedQuery(mCurrentUri, null, null, null, "name");
 
-
         if (c.moveToFirst()) {
             do {
                 String bookName = c.getString(c.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_NAME));
@@ -65,7 +64,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 String supplierName = c.getString(c.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_NAME));
                 supplierPhone = c.getString(c.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE));
                 quantity = c.getInt(c.getColumnIndex(BookContract.BookEntry.COLUMN_BOOK_QUANTITY));
-
 
                 nameTextView.setText(" " + bookName);
                 priceTextView.setText(" " + bookPrice);

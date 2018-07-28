@@ -115,7 +115,6 @@ public class CatalogActivity extends AppCompatActivity implements
                 return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
