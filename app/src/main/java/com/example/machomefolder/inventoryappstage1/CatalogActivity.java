@@ -7,7 +7,6 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,22 +17,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.machomefolder.inventoryappstage1.data.BookContract;
-import com.example.machomefolder.inventoryappstage1.data.BookDbHelper;
 
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    /**
-     * Identifier for the book data loader
-     */
     private static final int BOOK_LOADER = 0;
 
-    /**
-     * Adapter for the ListView
-     */
+    // Adapter for the ListView
     BookCursorAdapter mCursorAdapter;
 
     @Override
@@ -52,7 +44,7 @@ public class CatalogActivity extends AppCompatActivity implements
         });
 
         // Find the ListView which will be populated with the book data
-        ListView bookListView = (ListView) findViewById(R.id.list);
+        ListView bookListView = findViewById(R.id.list);
 
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
@@ -67,21 +59,14 @@ public class CatalogActivity extends AppCompatActivity implements
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                // Create new intent to go to {@link EditorActivity}
-                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                Intent intent = new Intent(CatalogActivity.this, BookDetailActivity.class);
 
-                // Form the content URI that represents the specific book that was clicked on,
-                // by appending the "id" (passed as input to this method) onto the
-                // {@link BookEntry#CONTENT_URI}.
-                // For example, the URI would be "content://com.example.android.books/books/2"
-                // if the book with ID 2 was clicked on.
+                // Form the content URI that represents the specific book that was clicked on
                 Uri currentBookUri = ContentUris.withAppendedId(BookContract.BookEntry.CONTENT_URI, id);
-
-                // Set the URI on the data field of the intent
                 intent.setData(currentBookUri);
-
-                // Launch the {@link EditorActivity} to display the data for the current book.
+                // Launch book details activity
                 startActivity(intent);
+                Log.v("CatalogActivity", "item click");
             }
         });
 
@@ -89,12 +74,9 @@ public class CatalogActivity extends AppCompatActivity implements
         getLoaderManager().initLoader(BOOK_LOADER, null, this);
     }
 
-    /**
-     * Helper method to insert hardcoded book data into the database. For debugging purposes only.
-     */
+    //Helper method to insert hardcoded book data into the database. For debugging purposes only.
     private void insertBook() {
-        // Create a ContentValues object where column names are the keys,
-        // and book attributes are the values.
+        // dummy data
         ContentValues values = new ContentValues();
         values.put(BookContract.BookEntry.COLUMN_BOOK_NAME, "The Catcher in the Rye");
         values.put(BookContract.BookEntry.COLUMN_BOOK_PRICE, 7);
@@ -103,15 +85,9 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(BookContract.BookEntry.COLUMN_BOOK_SUPPLIER_PHONE, "510-594-4568");
 
         // Insert a new row for data into the provider using the ContentResolver.
-        // Use the {@link BookEntry#CONTENT_URI} to indicate that we want to insert
-        // into the pets database table.
-        // Receive the new content URI that will allow us to access data in the future.
         Uri newUri = getContentResolver().insert(BookContract.BookEntry.CONTENT_URI, values);
     }
 
-    /**
-     * Helper method to delete all books in the database.
-     */
     private void deleteAllBooks() {
         int rowsDeleted = getContentResolver().delete(BookContract.BookEntry.CONTENT_URI, null, null);
         Log.v("CatalogActivity", rowsDeleted + " rows deleted from book database");
@@ -119,8 +95,8 @@ public class CatalogActivity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_catalog.xml file.
-        // This adds menu items to the app bar.
+
+        // This inflates menu items on the app bar.
         getMenuInflater().inflate(R.menu.menu_catalog, menu);
         Log.v("CatalogActivity", "menu inflated ");
         return true;
@@ -130,11 +106,9 @@ public class CatalogActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
-            // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
                 insertBook();
                 return true;
-            // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
                 deleteAllBooks();
                 Log.v("CatalogActivity", "option item selected ");
@@ -164,7 +138,7 @@ public class CatalogActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Update {@link BookCursorAdapter} with this new cursor containing updated book data
+        // Update cursor adapter with this new cursor containing updated book data
         mCursorAdapter.swapCursor(data);
     }
 
@@ -173,13 +147,16 @@ public class CatalogActivity extends AppCompatActivity implements
         // Callback called when the data needs to be deleted
         mCursorAdapter.swapCursor(null);
     }
-}
- /*   @Override
-    public void onBackPressed() {
 
+    @Override
+    public void onBackPressed() {
         super.onBackPressed();
     }
-}*/
+}
+
+
+
+
 
 
 

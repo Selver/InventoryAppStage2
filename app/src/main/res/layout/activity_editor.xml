@@ -16,7 +16,8 @@
         <!-- Label -->
         <TextView
             style="@style/CategoryStyle"
-            android:text="@string/category_overview" />
+            android:text="@string/category_overview"
+            android:textSize="@dimen/text_size_20" />
 
         <!-- Input fields -->
         <LinearLayout
@@ -24,14 +25,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:orientation="vertical"
-            android:paddingLeft="4dp">
+            android:paddingLeft="@dimen/dimen_4">
 
             <!-- Name field -->
             <EditText
                 android:id="@+id/edit_book_name"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_book_name"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                android:textSize="@dimen/text_size_20" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,8 +46,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:paddingRight="8dp"
-                    android:text="@string/unit_book_price" />
+                    android:paddingRight="@dimen/dimen_8"
+                    android:text="@string/unit_book_price"
+                    android:textSize="@dimen/text_size_20" />
 
                 <!-- Price field -->
                 <EditText
@@ -54,7 +57,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/hint_book_price"
-                    android:inputType="textCapWords" />
+                    android:inputType="numberDecimal"
+                    android:textSize="@dimen/text_size_20" />
             </LinearLayout>
 
             <!-- Quantity field -->
@@ -62,21 +66,23 @@
                 android:id="@+id/edit_book_quantity"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_book_quantity"
-                android:inputType="textCapWords" />
+                android:textSize="@dimen/text_size_20"
+                android:inputType="numberDecimal"/>
 
             <!-- Supplier Name field -->
             <EditText
                 android:id="@+id/edit_book_supplier_name"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_book_supplier_name"
-                android:inputType="textCapWords" />
+                android:textSize="@dimen/text_size_20" />
 
             <!-- Supplier Phone field -->
             <EditText
                 android:id="@+id/edit_book_supplier_phone"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_book_supplier_phone"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:textSize="@dimen/text_size_20" />
 
         </LinearLayout>
     </LinearLayout>
